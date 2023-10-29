@@ -17,15 +17,19 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
 
-
+@Builder
 @Data
+@Getter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+
 
 @Entity
 @Table(name="tbusers")
@@ -48,9 +52,15 @@ public class UserEntity {
 	
 	//many to many with roles
 	
-	//using set is recomended he has uniques values
+	//using set is recomended it has uniques values
 	@ManyToMany(fetch=FetchType.EAGER,targetEntity=RoleEntity.class,cascade=CascadeType.PERSIST)
 	@JoinTable(name="user_roles",joinColumns=@JoinColumn(name="user_id"),inverseJoinColumns=@JoinColumn(name="role_id"))
 	private Set<RoleEntity> roles;
 
+
+
+
+
 }
+
+
